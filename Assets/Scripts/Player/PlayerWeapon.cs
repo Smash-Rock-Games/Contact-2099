@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StoneSmashGames.Contact.Bugs;
 
 namespace StoneSmashGames.Contact.Player
 {
@@ -16,6 +17,8 @@ namespace StoneSmashGames.Contact.Player
     {
         public Sprite crosshair;
         public WeaponType weaponType;
+
+        public int damage;
 
         public float fireRate;
         public float range;
@@ -118,7 +121,7 @@ namespace StoneSmashGames.Contact.Player
 
                 for (int i = 0; i < weapon.numberOfShots; i++)
                 {
-                    RaycastHit hit;
+                    RaycastHit _hit;
 
                     firePoint.LookAt(aimTarget);
                     firePoint.localRotation *= Quaternion.Euler(
@@ -126,16 +129,18 @@ namespace StoneSmashGames.Contact.Player
                         Random.Range(-weapon.spread, weapon.spread),
                         Random.Range(-weapon.spread, weapon.spread));
 
-                    if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, weapon.range))
+                    if (Physics.Raycast(firePoint.position, firePoint.forward, out _hit, weapon.range))
 
                     {
-                        Debug.DrawRay(firePoint.position, firePoint.forward * hit.distance, Color.yellow, 1f);
-                        Debug.Log("Did Hit");
+                        Debug.DrawRay(firePoint.position, firePoint.forward * _hit.distance, Color.yellow, 1f);
+
+                        if (_hit.collider.TryGetComponent(out BugController _bug))
+                            _bug.TakeDamage(weapon.damage);
                     }
                     else
                     {
                         Debug.DrawRay(firePoint.position, firePoint.forward * weapon.range, Color.white, 1f);
-                        Debug.Log("Did not Hit");
+                        
                     }
 
                     firePoint.localRotation = Quaternion.identity;
