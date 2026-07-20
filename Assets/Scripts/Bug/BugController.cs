@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using StoneSmashGames.Contact.Player;
+using StoneSmashGames.Contact.Gameplay;
 
 namespace StoneSmashGames.Contact.Bugs
 {
@@ -32,11 +33,13 @@ namespace StoneSmashGames.Contact.Bugs
 
         bool isAttacking;
         NavMeshAgent agent;
+        GameManager gameManager;
 
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             target = FindObjectOfType<PlayerStats>().transform;
+            gameManager = FindObjectOfType<GameManager>();
 
             InitializeBug();
         }
@@ -93,6 +96,8 @@ namespace StoneSmashGames.Contact.Bugs
 
         public void Die()
         {
+            gameManager.spawnedBugs--;
+            gameManager.remainingBugs--;
             Destroy(gameObject);
         }
     }

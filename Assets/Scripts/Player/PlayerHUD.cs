@@ -8,6 +8,8 @@ namespace StoneSmashGames.Contact.Player
 {
     public class PlayerHUD : MonoBehaviour
     {
+        public TMP_Text interactionPrompt;
+
         public Image crosshair;
         public TMP_Text weaponName;
         public TMP_Text magazineAmmo;

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Worker
+  m_Name: Brute
   m_EditorClassIdentifier: Assembly-CSharp:StoneSmashGames.Contact.Bugs:BugData
-  maxHealth: 20
-  speed: 3.5
-  canStun: 1
-  stunTime: 0.4
-  attackRange: 1.5
-  attackChargeTime: 0.4
-  attackTime: 0.2
+  maxHealth: 0
+  speed: 0
+  canStun: 0
+  stunTime: 0
+  attackRange: 0
+  attackChargeTime: 0
+  attackTime: 0

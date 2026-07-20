@@ -83,10 +83,16 @@ namespace StoneSmashGames.Contact.Player
             if (Physics.Raycast(playerCamera.position, playerCamera.forward, out _hit, weapon.range))
             {
                 aimTarget = _hit.point;
+
+                if (_hit.collider.TryGetComponent(out BugController _bug))
+                    playerHUD.crosshair.color = Color.red;
+                else
+                    playerHUD.crosshair.color = Color.white;
             }
             else
             {
                 aimTarget = playerCamera.position + playerCamera.forward * weapon.range;
+                playerHUD.crosshair.color = Color.white;
             }
         }
 
